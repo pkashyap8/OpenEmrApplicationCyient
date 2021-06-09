@@ -20,28 +20,35 @@ public class Demo1Test {
 		XSSFWorkbook book=new XSSFWorkbook(file);
 		
 		XSSFSheet sheet = book.getSheet("validCredentialTest");
-		//XSSFRow row = sheet.getRow(0);
-		//XSSFCell cell = row.getCell(1);
 		
-		//DataFormatter format=new DataFormatter();
-	
-		//String cellValue = format.formatCellValue(cell);
-		//System.out.println(cellValue);
 		
-		for(int r=0; r<3; r++) {
-			for(int p=0; p<4; p++ ) {
+		int rowCount=sheet.getPhysicalNumberOfRows();
+		//System.out.println(rowCount);
+		
+		int cellCount=sheet.getRow(0).getPhysicalNumberOfCells();
+		//System.out.println(cellCount);
+		
+		Object[][] main= new Object[rowCount-1][cellCount];
+		
+		
+		
+		for(int r=0; r<rowCount; r++) 
+		{
+			for(int c=0; c<cellCount; c++ ) 
+			{
 				XSSFRow row = sheet.getRow(r);
-				XSSFCell cell = row.getCell(p);
-				
+				XSSFCell cell = row.getCell(c);
 				DataFormatter format=new DataFormatter();
-			
 				String cellValue = format.formatCellValue(cell);
 				System.out.println(cellValue);
+				
+				main[r-1][c]=cellValue;
 			}
 		}
+		System.out.println(main);
 		
-		//String cellValue= cell.getStringCellValue();
-		//System.out.println(cellValue);
+		
 	}
 
 }
+
