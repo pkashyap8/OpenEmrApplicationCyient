@@ -11,6 +11,7 @@ import com.cyient.page.AddPatientPage;
 import com.cyient.page.DashboardPage;
 import com.cyient.page.LoginPage;
 import com.cyient.page.PatientFinderPage;
+import com.cyient.page.PatientMainPage;
 
 public class PatientTest extends WebDriverWrapper {
 
@@ -67,6 +68,9 @@ public class PatientTest extends WebDriverWrapper {
 		addpatient.createNewPatient();
 		addpatient.switchToOutOfFrame();
 		addpatient.switchIntoFrame();
+		addpatient.confirmCreateNewPatient();
+		addpatient.alertHandle();
+		addpatient.switchToOutOfFrame();
 		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@ src='/a/openemr/interface/new/new.php']")));
 		//Select sirname=new Select(driver.findElement(By.id("form_title")));
 		//sirname.selectByValue("Mr.");
@@ -81,21 +85,29 @@ public class PatientTest extends WebDriverWrapper {
 		//driver.switchTo().defaultContent();
 		
 		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@ id='modalframe']")));
-		driver.findElement(By.xpath("//input[@ value='Confirm Create New Patient']")).click();
+		//driver.findElement(By.xpath("//input[@ value='Confirm Create New Patient']")).click();
 		//Thread.sleep(5000);
 		//driver.findElement(By.xpath("//div[@class='closeDlgIframe']")).click();
 		//driver.switchTo().alert().accept();
 		
-		Thread.sleep(5000);
-		 driver.switchTo().alert().accept();
-		 driver.findElement(By.xpath("//div[@class='closeDlgIframe']")).click();
+		//Thread.sleep(5000);
+		 //driver.switchTo().alert().accept();
+		// driver.findElement(By.xpath("//div[@class='closeDlgIframe']")).click();
+		
+		
+		//Patient MainPage
+		PatientMainPage  Page = new PatientMainPage (driver);
+		Page.switchTOPatFrame();
+		Page.medicalRecordDash();
+		
+		
+		
+		// driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@name='pat']")));
 		 
-		 driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@name='pat']")));
+		// String actualValue=driver.findElement(By.xpath("//h2[contains(text(),'Medical Record')]")).getText();
 		 
-		 String actualValue=driver.findElement(By.xpath("//h2[contains(text(),'Medical Record')]")).getText();
-		 
-		 System.out.println(actualValue);
-			Assert.assertEquals(actualValue, "Medical Record Dashboard - XYZ PQRS   ");
+		// System.out.println(actualValue);
+			//Assert.assertEquals(actualValue, "Medical Record Dashboard - XYZ PQRS   ");
 		 
 		
 	}

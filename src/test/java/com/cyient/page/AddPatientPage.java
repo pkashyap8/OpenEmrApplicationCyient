@@ -15,7 +15,8 @@ public class AddPatientPage
 	private By  patientgenderLocator = By.id("form_sex");
 	private By  createNewPatientLocator =By.id("create");
 	private By  switchIntoFrameLocator =By.xpath("//iframe[@ id='modalframe']");
-	
+	private By  confirmCreateNewPatientLocator = By.xpath("//input[@ value='Confirm Create New Patient']");
+	private By closeDlgIframeLocator = By.xpath("//div[@class='closeDlgIframe']");
 	
 	private WebDriver driver;
 
@@ -66,16 +67,27 @@ public class AddPatientPage
 	}
 
 	
-	public void switchIntoFrame() {
+	public void switchIntoFrame() throws InterruptedException {
+		Thread.sleep(5000);
 		driver.switchTo().frame(driver.findElement(switchIntoFrameLocator));
 	}
 
+	public void confirmCreateNewPatient() {
+		driver.findElement(confirmCreateNewPatientLocator).click();
+	}
 
 
+	public String alertHandle() throws InterruptedException {
+		String alert = driver.switchTo().alert().getText();
+		System.out.println(alert);
+		Thread.sleep(3000);
+		driver.switchTo().alert().accept();
+		return alert;
+	}
 
-
-
-
+	public void closeDlgIframe() {
+		driver.findElement(closeDlgIframeLocator).click();
+	}
 
 
 
