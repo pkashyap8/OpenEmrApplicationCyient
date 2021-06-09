@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.cyient.base.WebDriverWrapper;
+import com.cyient.page.AddPatientPage;
 import com.cyient.page.DashboardPage;
 import com.cyient.page.LoginPage;
 import com.cyient.page.PatientFinderPage;
@@ -47,30 +48,39 @@ public class PatientTest extends WebDriverWrapper {
 		//driver.findElement(By.id("create_patient_btn1")).click();
 		//driver.switchTo().defaultContent();
 		
-		//Add Patient
+		//Patient Finder
 		
 		PatientFinderPage patient=new PatientFinderPage(driver);
 		patient.switchToFinFrame();
 		patient.clickOnAddNewPatient();
 		patient.switchOutOfFrame();
 		
+		//Add Patient
 		
+		AddPatientPage addpatient=new AddPatientPage(driver);
+		addpatient.switchTopatientFrame();
+		addpatient.sirname("Mr.");
+		addpatient.sendPatientFirstName("xYZ");
+		addpatient.sendPatientLastName("PQRS");
+		addpatient.dateOfBirth("2021-06-09");
+		addpatient.gender("Male");
+		addpatient.createNewPatient();
+		addpatient.switchToOutOfFrame();
+		addpatient.switchIntoFrame();
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@ src='/a/openemr/interface/new/new.php']")));
+		//Select sirname=new Select(driver.findElement(By.id("form_title")));
+		//sirname.selectByValue("Mr.");
+		//driver.findElement(By.id("form_fname")).sendKeys("xYZ");
+		//driver.findElement(By.id("form_mname")).sendKeys("ABC");
+		//driver.findElement(By.id("form_lname")).sendKeys("PQRS");
+		//driver.findElement(By.id("form_DOB")).sendKeys("2021-06-07");
 		
+		//Select sex =new Select(driver.findElement(By.id("form_sex")));
+		//sex.selectByValue("Male");
+		//driver.findElement(By.id("create")).click();
+		//driver.switchTo().defaultContent();
 		
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@ src='/a/openemr/interface/new/new.php']")));
-		Select sirname=new Select(driver.findElement(By.id("form_title")));
-		sirname.selectByValue("Mr.");
-		driver.findElement(By.id("form_fname")).sendKeys("xYZ");
-		driver.findElement(By.id("form_mname")).sendKeys("ABC");
-		driver.findElement(By.id("form_lname")).sendKeys("PQRS");
-		driver.findElement(By.id("form_DOB")).sendKeys("2021-06-07");
-		
-		Select sex =new Select(driver.findElement(By.id("form_sex")));
-		sex.selectByValue("Male");
-		driver.findElement(By.id("create")).click();
-		driver.switchTo().defaultContent();
-		
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@ id='modalframe']")));
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@ id='modalframe']")));
 		driver.findElement(By.xpath("//input[@ value='Confirm Create New Patient']")).click();
 		//Thread.sleep(5000);
 		//driver.findElement(By.xpath("//div[@class='closeDlgIframe']")).click();

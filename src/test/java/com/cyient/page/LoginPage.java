@@ -46,10 +46,4 @@ public class LoginPage
 		return actualText;
 	}
 	
-	
-	
-	
-	
-	
-	
 }
